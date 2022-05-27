@@ -4,20 +4,17 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
+    "dev": "strapi develop --watch-admin",
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
     "@strapi/plugin-i18n": "4.1.12",
     "@strapi/plugin-users-permissions": "4.1.12",
     "@strapi/strapi": "4.1.12",
-    "better-sqlite3": "7.4.6",
-    "knex": "^2.1.0",
-    "pg": "^8.7.3",
-    "strapi-connector-bookshelf": "^3.6.10"
+    "pg": "8.6.0"
   },
   "author": {
     "name": "A Strapi developer"
@@ -26,7 +23,7 @@
     "uuid": "5b34ebaa-cfe4-43a0-9f73-da94c2db09b2"
   },
   "engines": {
-    "node": ">=12.x.x <=14.x.x",
+    "node": ">=12.x.x <=16.x.x",
     "npm": ">=6.0.0"
   },
   "license": "MIT"
