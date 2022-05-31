@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_bootstrap_wysiwygs",
+  "info": {
+    "displayName": "wysiwyg",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "richtext"
+    }
+  }
+}
