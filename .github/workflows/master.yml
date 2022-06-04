@@ -46,11 +46,11 @@ jobs:
       - name: Link the public folder on the server
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm -rf /var/www/pullcrm.com/strapi/release/public/uploads && ln -s /var/www/pullcrm.com/strapi/uploads /var/www/pullcrm.com/strapi/release/public/uploads'
 
-      # - name: Copy .env file to project
-      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cp /var/www/pullcrm.com/strapi/.env /var/www/pullcrm.com/strapi/release/.env'
+      - name: Copy .env file to project
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cp /var/www/pullcrm.com/strapi/.env /var/www/pullcrm.com/strapi/release/.env'
 
-      # - name: Install modules and build project
-      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.com/strapi/release && yarn install && yarn build'
+      - name: Install modules and build project
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.com/strapi/release && yarn install && yarn build'
 
       - name: Delete old versions of project
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.com/strapi/versions && rm -rf `ls -t | tail -n +6`'
