@@ -50,7 +50,7 @@ jobs:
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cp /var/www/pullcrm.com/strapi/.env /var/www/pullcrm.com/strapi/release/.env'
 
       - name: Install modules and build project
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.com/strapi/release && yarn install && yarn build'
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && cd /var/www/pullcrm.com/strapi/release && yarn install && yarn build'
 
       - name: Delete old versions of project
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.com/strapi/versions && rm -rf `ls -t | tail -n +6`'
