@@ -16,10 +16,10 @@
     }
   },
   "attributes": {
-    "name": {
+    "title": {
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
       },
       "type": "string",
@@ -48,6 +48,16 @@
       "components": [
         "dynamic.wysiwyg"
       ]
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.seo"
     }
   }
 }

@@ -7,15 +7,15 @@ module.exports = ({ env }) => ({
     enabled: true,
     config: {
       contentTypes: {
-        // page: {
-        //   field: 'slug',
-        //   references: 'name',
-        // },
+        page: {
+          field: 'slug',
+          references: 'title',
+        },
 
-        // category: {
-        //   field: 'slug',
-        //   references: 'name',
-        // },
+        category: {
+          field: 'slug',
+          references: 'title',
+        },
       },
     },
   },
