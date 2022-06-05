@@ -33,13 +33,13 @@ jobs:
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
       - name: Stop project
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'pm2 stop /var/www/pullcrm.com/strapi/app/ecosystem.config.js'
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && pm2 stop /var/www/pullcrm.com/strapi/app/ecosystem.config.js'
 
       - name: Update server project
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.com/strapi/app && git pull && yarn install && yarn build'
 
       - name: Reload project
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'pm2 startOrReload /var/www/pullcrm.com/strapi/app/ecosystem.config.js'
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && pm2 startOrReload /var/www/pullcrm.com/strapi/app/ecosystem.config.js'
 
       - name: Slack Notify
         if: always()
