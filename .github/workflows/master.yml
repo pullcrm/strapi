@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [ devel ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -32,14 +32,35 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
-      - name: Stop project
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && pm2 stop /var/www/pullcrm.com/strapi/app/ecosystem.config.js'
+      - name: Create the release folder on the server
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'mkdir /var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }}'
 
-      - name: Update server project
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.com/strapi/app && git pull && yarn install && yarn build'
+      - name: Upload files to the server
+        run: rsync -r ./ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }}'
 
-      - name: Reload project
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && pm2 startOrReload /var/www/pullcrm.com/strapi/app/ecosystem.config.js'
+      - name: Link the release folder on the server
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm /var/www/pullcrm.com/strapi/release && ln -s /var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }} /var/www/pullcrm.com/strapi/release'
+
+      - name: Link the public folder on the server
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm -rf /var/www/pullcrm.com/strapi/release/public/uploads && ln -s /var/www/pullcrm.com/strapi/uploads /var/www/pullcrm.com/strapi/release/public/uploads'
+
+      - name: Copy .env file to project
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cp /var/www/pullcrm.com/strapi/.env /var/www/pullcrm.com/strapi/release/.env'
+
+      - name: Copy 'ecosystem.config.js' file to project
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cp /var/www/pullcrm.com/strapi/ecosystem.config.js /var/www/pullcrm.com/strapi/release/ecosystem.config.js'
+
+      - name: Install modules and build project
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.com/strapi/release && yarn install && yarn build'
+
+      # - name: Stop project
+      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && pm2 stop /var/www/pullcrm.com/strapi/app/ecosystem.config.js'
+
+      # - name: Update server project
+      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.com/strapi/app && git pull && yarn install && yarn build'
+
+      # - name: Reload project
+      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && pm2 startOrReload /var/www/pullcrm.com/strapi/app/ecosystem.config.js'
 
       - name: Slack Notify
         if: always()
