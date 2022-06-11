@@ -114,4 +114,5 @@ build
 .strapi-updater.json
 
 .env
+ecosystem.config.js
 
