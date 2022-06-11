@@ -5,8 +5,8 @@ name: CI
 # Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
-  # push:
-  #   branches: [ devel ]
+  push:
+    branches: [ devel ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -38,20 +38,23 @@ jobs:
       - name: Upload files to the server
         run: rsync -r ./ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }}'
 
-      - name: Link the release folder on the server
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm /var/www/pullcrm.com/strapi/release && ln -s /var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }} /var/www/pullcrm.com/strapi/release'
+      - name: Install modules
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }} && npm install'
 
-      - name: Link the public folder on the server
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm -rf /var/www/pullcrm.com/strapi/release/public/uploads && ln -s /var/www/pullcrm.com/strapi/uploads /var/www/pullcrm.com/strapi/release/public/uploads'
+      # - name: Link the release folder on the server
+      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm /var/www/pullcrm.com/strapi/release && ln -s /var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }} /var/www/pullcrm.com/strapi/release'
 
-      - name: Copy .env file to project
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cp /var/www/pullcrm.com/strapi/.env /var/www/pullcrm.com/strapi/release/.env'
+      # - name: Link the public folder on the server
+      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm -rf /var/www/pullcrm.com/strapi/release/public/uploads && ln -s /var/www/pullcrm.com/strapi/uploads /var/www/pullcrm.com/strapi/release/public/uploads'
 
-      - name: Copy 'ecosystem.config.js' file to project
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cp /var/www/pullcrm.com/strapi/ecosystem.config.js /var/www/pullcrm.com/strapi/release/ecosystem.config.js'
+      # - name: Copy .env file to project
+      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cp /var/www/pullcrm.com/strapi/.env /var/www/pullcrm.com/strapi/release/.env'
 
-      - name: Delete old versions of project
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.com/strapi/versions && rm -rf `ls -t | tail -n +6`'
+      # - name: Copy 'ecosystem.config.js' file to project
+      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cp /var/www/pullcrm.com/strapi/ecosystem.config.js /var/www/pullcrm.com/strapi/release/ecosystem.config.js'
+
+      # - name: Delete old versions of project
+      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.com/strapi/versions && rm -rf `ls -t | tail -n +6`'
 
       # - name: Install modules and build project
       #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && nvm use 16 && cd /var/www/pullcrm.com/strapi/release && npm install && npm run build'
