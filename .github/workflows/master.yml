@@ -39,7 +39,7 @@ jobs:
         run: rsync -r ./ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }}'
 
       - name: Install modules
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }} && npm install'
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'export NVM_DIR=~/.nvm && source ~/.nvm/nvm.sh && cd /var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }} && npm install'
 
       # - name: Link the release folder on the server
       #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm /var/www/pullcrm.com/strapi/release && ln -s /var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }} /var/www/pullcrm.com/strapi/release'
