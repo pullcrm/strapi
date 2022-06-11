@@ -7,12 +7,22 @@ module.exports = ({ env }) => ({
     enabled: true,
     config: {
       contentTypes: {
-        page: {
+        'page': {
           field: 'slug',
           references: 'title',
         },
 
-        category: {
+        'category': {
+          field: 'slug',
+          references: 'title',
+        },
+
+        'faq-page': {
+          field: 'slug',
+          references: 'title',
+        },
+
+        'document-page': {
           field: 'slug',
           references: 'title',
         },
