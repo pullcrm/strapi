@@ -5,8 +5,8 @@ name: CI
 # Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ devel ]
+  # push:
+  #   branches: [ devel ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -35,11 +35,11 @@ jobs:
       - name: Create the release folder on the server
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'mkdir /var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }}'
 
-      - name: Upload files to the server
-        run: rsync -r ./ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }}'
+      # - name: Upload files to the server
+      #   run: rsync -r ./ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }}'
 
-      - name: Install modules
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'export NVM_DIR=~/.nvm && source ~/.nvm/nvm.sh && cd /var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }} && npm install'
+      # - name: Install modules
+      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'export NVM_DIR=~/.nvm && source ~/.nvm/nvm.sh && cd /var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }} && npm install'
 
       # - name: Link the release folder on the server
       #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm /var/www/pullcrm.com/strapi/release && ln -s /var/www/pullcrm.com/strapi/versions/release-${{ steps.date.outputs.date }} /var/www/pullcrm.com/strapi/release'
