@@ -9985,9 +9985,9 @@ strapi-plugin-populate-deep@^0.1.2:
   resolved "https://registry.yarnpkg.com/strapi-plugin-populate-deep/-/strapi-plugin-populate-deep-0.1.2.tgz#89e9fa0dd10bb1c57336625f765cff98950dafa2"
   integrity sha512-cYmK5g4QqrGAWjUzEnd6P1XcqeXFcu/2yk/lg3ClQDnp46vb9i03CT7tW2YHz9JSf8g371iq0JPholL1q7Q1CA==
 
-"strapi-plugin-slugify@git+ssh://git@github.com/pullcrm/strapi-plugin-slugify.git#3.0.0":
+"strapi-plugin-slugify@git+ssh://git@github.com/pullcrm/strapi-plugin-slugify.git#3.0.1":
   version "2.2.2"
-  resolved "git+ssh://git@github.com/pullcrm/strapi-plugin-slugify.git#e7cdfe2cf7a3492d7c80b31e38a2239009c84d6d"
+  resolved "git+ssh://git@github.com/pullcrm/strapi-plugin-slugify.git#787f9578057168dbe31991407b95b363d8af4a7b"
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
 
