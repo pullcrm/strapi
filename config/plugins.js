@@ -41,6 +41,15 @@ module.exports = ({ env }) => ({
     }
   },
 
+  'sitemap': {
+    enabled: true,
+    config: {
+      autoGenerate: false,
+      allowedFields: ['id', 'uid', 'slug', 'category'],
+      excludedTypes: ['admin::permission', 'admin::user', 'admin::role', 'admin::api-token', 'plugin::i18n.locale', 'plugin::users-permissions.permission', 'plugin::users-permissions.role', 'api::category.category', 'plugin::users-permissions.user'],
+    },
+  },
+
   'ckeditor': {
     enabled: true,
     config: {
