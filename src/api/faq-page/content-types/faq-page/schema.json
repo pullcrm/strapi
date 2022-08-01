@@ -4,7 +4,7 @@
   "info": {
     "singularName": "faq-page",
     "pluralName": "faq-pages",
-    "displayName": "Faq pages",
+    "displayName": "Faq",
     "description": ""
   },
   "options": {
@@ -32,11 +32,6 @@
         }
       },
       "type": "string"
-    },
-    "category": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::category.category"
     },
     "sections": {
       "pluginOptions": {
