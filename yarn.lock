@@ -10130,10 +10130,9 @@ strapi-plugin-populate-deep@^0.1.2:
   resolved "https://registry.yarnpkg.com/strapi-plugin-populate-deep/-/strapi-plugin-populate-deep-0.1.2.tgz#89e9fa0dd10bb1c57336625f765cff98950dafa2"
   integrity sha512-cYmK5g4QqrGAWjUzEnd6P1XcqeXFcu/2yk/lg3ClQDnp46vb9i03CT7tW2YHz9JSf8g371iq0JPholL1q7Q1CA==
 
-strapi-plugin-sitemap@^2.0.8:
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/strapi-plugin-sitemap/-/strapi-plugin-sitemap-2.0.8.tgz#677d8625c3864bf2e300faf9d08d5871304c7029"
-  integrity sha512-OERSAtWIdaHeYgkFCFPtQisj4kuoxOerwayLhAEG+xnwtfbaZSG9kFuoRCrAMOhBkKtRgEn2jCsJGlIJf0t4iQ==
+"strapi-plugin-sitemap@git+ssh://git@github.com/pullcrm/strapi-plugin-sitemap.git#2.0.9":
+  version "2.0.9"
+  resolved "git+ssh://git@github.com/pullcrm/strapi-plugin-sitemap.git#d231977d9ca45b9028dfb0e7d1f48d4ec947458b"
   dependencies:
     immutable "^3.8.2"
     redux-immutable "^4.0.0"
