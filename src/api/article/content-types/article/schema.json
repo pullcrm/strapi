@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "pages",
+  "collectionName": "articles",
   "info": {
-    "singularName": "page",
-    "pluralName": "pages",
-    "displayName": "Pages",
+    "singularName": "article",
+    "pluralName": "articles",
+    "displayName": "Articles",
     "description": ""
   },
   "options": {
@@ -22,8 +22,7 @@
           "localized": true
         }
       },
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "slug": {
       "pluginOptions": {
@@ -33,16 +32,19 @@
       },
       "type": "string"
     },
-    "sections": {
+    "content": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "type": "dynamiczone",
-      "components": [
-        "dynamic.wysiwyg"
-      ]
+      "type": "richtext",
+      "required": true
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::articles-category.articles-category"
     },
     "seo": {
       "type": "component",

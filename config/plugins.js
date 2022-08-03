@@ -26,6 +26,16 @@ module.exports = ({ env }) => ({
           field: 'slug',
           references: 'title',
         },
+
+        'article': {
+          field: 'slug',
+          references: 'title',
+        },
+
+        'articles-category': {
+          field: 'slug',
+          references: 'title',
+        },
       },
     },
   },

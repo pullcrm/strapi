@@ -4,7 +4,7 @@
   "info": {
     "singularName": "document-page",
     "pluralName": "document-pages",
-    "displayName": "Document pages",
+    "displayName": "Documents",
     "description": ""
   },
   "options": {
@@ -32,11 +32,6 @@
         }
       },
       "type": "string"
-    },
-    "category": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::category.category"
     },
     "sections": {
       "pluginOptions": {
