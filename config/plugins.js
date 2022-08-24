@@ -3,6 +3,10 @@ module.exports = ({ env }) => ({
     enabled: true,
   },
 
+  'publisher': {
+    enabled: true,
+  },
+
   'slugify': {
     enabled: true,
     config: {
