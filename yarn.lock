@@ -10251,9 +10251,9 @@ strapi-plugin-publisher@^1.1.3:
     sitemap "^7.1.0"
     xml2js "^0.4.23"
 
-"strapi-plugin-slugify@git+ssh://git@github.com/pullcrm/strapi-plugin-slugify.git#3.0.2":
+"strapi-plugin-slugify@git+ssh://git@github.com/pullcrm/strapi-plugin-slugify.git#3.0.3":
   version "2.2.2"
-  resolved "git+ssh://git@github.com/pullcrm/strapi-plugin-slugify.git#29bd9432830bb01818250e09c75072c5d7e87806"
+  resolved "git+ssh://git@github.com/pullcrm/strapi-plugin-slugify.git#df13349c62fb29438956913c0cb8053fbf5ffabd"
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
 
